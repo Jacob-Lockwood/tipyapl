@@ -1,7 +1,7 @@
 from LANG import*
 
 def dsp(x):
-  if isf(x):return x
+  if isf(x):return[str(x)]
   sx,tx,dx=x
   st=list(map(str,dx))
   if[]==sx:return st

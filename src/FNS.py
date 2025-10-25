@@ -9,8 +9,8 @@ def prd(a):
   x=1
   for y in a:x*=y
   return x
-pf=[*"+-*=","/.","/:","//","**"]
-fs=pf+[*"f,@r#[]"]
+pf=list("+-*")+["/.","/:","//","**","==","/=","gt","lt","ge","le"]
+fs=pf+list("f,@r#[]")
 def pm(f,t,x):
   if"+"==f[1]:return 0,x+1
   if"-"==f[1]:return 0,x-1
@@ -23,7 +23,8 @@ def pd(f,tx,x,ty,y):
   if"/:"==f[1]:return 0,x%y
   if"//"==f[1]:return 0,x//y
   if"**"==f[1]:return 0,x**y
-  if"="==f[1]:return 0,int(x==y)
+  if"=="==f[1]:return 0,int(x==y)
+  if"/="==f[1]:return 0,int(x!=y)
 def mf(f,x):
   s,t,d=x
   if","==f:return[prd(s)],t,d

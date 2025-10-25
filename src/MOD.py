@@ -1,5 +1,5 @@
 from FNS import*
-mm=[*"/\\_","].","[."]
+mm=list("/\\_")+["].","[."]
 dm=["o","]:","[:"]
 def rm(ex,f,x):
   def e1(f,x):
