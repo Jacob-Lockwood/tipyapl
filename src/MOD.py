@@ -1,6 +1,6 @@
 from FNS import*
-mm=list("/\\_")+["].","[."]
-dm=["o","]:","[:"]
+mm=["/","\\","_"]
+dm=["o","]:","[:",",:","@:"]
 def rm(ex,f,x):
   def e1(f,x):
     d=[rm(ex,f,([],x[1],[z]))for z in x[2]]
@@ -45,9 +45,6 @@ def rd(ex,f,x,y):
     t,v=pd(f,tx,dx[0],ty,dy[0])
     return[],t,[v]
   if f[0]==0:return df(f[1],x,y)
-  if f[0]==1:
-    if"[."==f[1]:return rm(ex,f[2],x)
-    if"]."==f[1]:return rm(ex,f[2],y)
   elif f[0]==2:
     if"o"==f[1]:return rd(ex,f[2],rm(ex,f[3],x),rm(ex,f[3],y))
     # if"]:"==f[1]:return 

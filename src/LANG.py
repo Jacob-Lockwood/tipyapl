@@ -24,7 +24,7 @@ def p(s,**a):
     return r,vrs[x]
   elif"=:"==s[:2]:return s[3:],(4,s[2])
   elif'"'==x:
-    s,f=mx(r)
+    s,f=mx(r,**a)
     if isf(f):
       return s,([],1,[f])
     return s,f[2][0]
@@ -38,19 +38,19 @@ def mx(s,**a):
   if s[0]in mm and s[:2]not in fs:
     x=s[0]
     s,f=mx(s[1:],**a)
-    if("_",[])==(x,f[0]):return s,([],0,[-f[2][0]])
-    return s,(1,x,f)
+    return s,([],0,[-f[2][0]])if("_",[])==(x,f[0])else(1,x,f)
   s,l=p(s,**a)
   if s[:2]in dm:
     x=s[:2]
     s,r=mx(s[2:],**a)
-    return s,(2,x,l,r)
+    return s,jfn(l,r)if",:"==x  else(2,x,l,r)
   if s[:1]in dm:
     x=s[0]
     s,r=mx(s[1:],**a)
     return s,(2,x,l,r)
   return s,l
 def ex(s,**a):
+  r=lambda f,*d:[rm,rd][len(d)-1](ex,f,*d)
   if":="==s[1:3]:
     n=s[0];s,x=ex(s[3:],**a)
     vrs[n]=x
@@ -67,14 +67,16 @@ def ex(s,**a):
       s,o=mx(s,**a)
     for t in f[:-1]:
       if t[0]==4:vrs[t[1]]=x
-      else:x=rm(ex,t,x)
+      else:x=r(t,x)
     if"'"==o:
-      s,r=mx(s,**a)
-      if"Y"not in a:o=rm(ex,r,a["X"])
-      else:o=rd(ex,r,a["X"],a["Y"])
+      s,g=mx(s,**a)
+      if"Y"not in a:o=r(g,a["X"])
+      else:o=r(g,a["X"],a["Y"])
     if o[0]==4:vrs[o[1]]=x
-    elif isf(o):x=rm(ex,o,x)
-    else:x=rd(ex,f[-1],x,o)
+    elif isf(o):x=r(o,x)
+    else:x=r(f[-1],x,o)
     f=[]
-  for t in f:x=rm(ex,t,x)
+  if"X"in a and isf(x):
+    x=r(x,a["X"])
+  for t in f:x=r(t,x)
   return s,x
